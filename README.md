@@ -117,6 +117,10 @@ In tools, you'll see install_webos.bat, sorry, didn't get to a shell script yet.
 Windows  
     c:\temp\Enyo\TopWatch> tools\deploy.bat
 	
-# Part Two
+# Part II
 
-In Part Two I'll show how to integrate with Cordova.
+Part Two is kind of lame, I'll basically take the output from Part I, and make it a Github project that can be incorporated as a submodule in Part III.
+
+# Part III
+
+In Part Three I'll show how to integrate with Cordova.
