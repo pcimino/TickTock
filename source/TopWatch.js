@@ -55,10 +55,10 @@ enyo.kind({
 					content: "Email Support@TransLunarDesigns.com",
 					ontap: "buttonEmailTap", 
 				},
-				{name: "message", style: "font-size: 26px; padding: 6px; text-align: center;color:black;", content:"Enyo 2 Demonstration app", ontap: "openGithub"},
+				{name: "message", style: "font-size: 26px; padding: 6px; text-align: center;color:black;", content:"Enyo 2 Demonstration App"},
 				{kind: "onyx.Button", 
-						content: "Project Source Code",
-						ontap: "openGithub",
+						content: "Project Blog & Code",
+						ontap: "openBlog",
 				},
 				{kind: "onyx.Button", 
 					style: "margin-left: 20px;",
@@ -172,7 +172,7 @@ enyo.kind({
 		var retStr = padChar + stringVal;
 		return retStr.substring(stringVal.length - length);
 	},
-	openGithub: function() {
+	openBlog: function() {
 		window.open("http://pcimino.blog.com/enyo/")
 	}
 });
