@@ -55,7 +55,7 @@ You can follow the [Bootplate instructions here](https://github.com/enyojs/enyo/
     > cd TopWatch
     > git submodule update --init --recursive
     ( login to your Github account and create a [new repository here.](https://github.com/new)
-    > git remote set-url origin git@github.com:\<your user name\>/TopWatch.git
+    > git remote set-url origin git@github.com:your_username/TopWatch.git
     > git push
 </pre>
 Now You have a templated HelloWorld project in Github, and you're ready to start building the app.

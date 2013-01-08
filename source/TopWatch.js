@@ -173,6 +173,6 @@ enyo.kind({
 		return retStr.substring(stringVal.length - length);
 	},
 	openGithub: function() {
-		window.open("https://github.com/pcimino/TopWatch")
+		window.open("http://pcimino.blog.com/enyo/")
 	}
 });
