@@ -1,13 +1,13 @@
 TopWatch
 ========
 
-HTML5 Stop Watch demo leveraging the Enyo Bootplate Application template for packaged Enyo
+HTML5 Stop Watch demo leveraging the Enyo Bootplate Application template for packaged Enyo.
 
 Refer to the [Wiki](https://github.com/enyojs/enyo/wiki/Bootplate) for how to get started with Bootplate
 
 ## Using Enyo to build and deploy on multiple platforms
 
-This is the first part of a multi-step tutorial. The final goal is to take an Enyo application and deploy it to multiple platforms. In Part One, I point you to the resources you'll need to create and install the TopWatch application. I'll also take you througn the steps of building and deploying this application to a webOS device or emulator.
+This is the first part of a [multi-step tutorial](http://pcimino.blog.com/enyo/). The final goal is to take an Enyo application and deploy it to multiple platforms. In Part One, I point you to the resources you'll need to create and install the TopWatch application. I'll also take you througn the steps of building and deploying this application to a webOS device or emulator.
 
 Far from a comprehensive tutorial. I provide guidance as to how I approached this problem and the tools I used to solve it. If you're a beginner, then you'll need to go to each resource and forllow those tutorials to install the correct tools. TopWatch is an implemented application, and I hope it provides you with some ideas on how to build and deploy your own app.
 
@@ -51,11 +51,11 @@ You can follow the [Bootplate instructions here](https://github.com/enyojs/enyo/
 [Dupliforking](https://github.com/enyojs/enyo/wiki/Dupliforking)
 <pre>
     > cd C:\temp\Enyo
-    > git clone https://github.com/enyojs/bootplate.git TopWatch
-    > cd TopWatch
+    > git clone https://github.com/enyojs/bootplate.git TopWatch_Build
+    > cd TopWatch_Build
     > git submodule update --init --recursive
     ( login to your Github account and create a [new repository here.](https://github.com/new)
-    > git remote set-url origin git@github.com:your_username/TopWatch.git
+    > git remote set-url origin git@github.com:your_username/TopWatch_Build.git
     > git push
 </pre>
 Now You have a templated HelloWorld project in Github, and you're ready to start building the app.
@@ -65,8 +65,8 @@ The TopWatch project is already set up for Enyo using Bootplate. You can compile
 	http://www.apache.org/licenses/LICENSE-2.0
 
 Git:<pre>
-    > git clone https://github.com/pcimino/TopWatch.git
-    > cd TopWatch
+    > git clone https://github.com/pcimino/TopWatch_Build.git
+    > cd TopWatch_Build
     > git submodule update --init --recursive
 </pre>
 These steps are not necessary if you're using the TopWatch project, but if you want to include other Enyo projects as submodules in your library:<pre>
@@ -96,14 +96,14 @@ Realistically you might take the minified bootplate project and use that as a ba
 To build the base application using the bootplate deployment:
 
 Shell
-    /c/temp/Enyo/TopWatch> ./tools/deploy.sh
+    /c/temp/Enyo/TopWatch_Build> ./tools/deploy.sh
 Or Windows
-    c:\temp\Enyo\TopWatch> tools\deploy.bat  
+    c:\temp\Enyo\TopWatch_Build> tools\deploy.bat  
   
 ## Packaging the Deployment
 To install this on a webOS device or emulator, the app needs to be packaged
 This assembles and minifies the code with the libraries in preparation of deployment. Having the /www directory means there are other resources I want in the project root directory, so instead, run the deploy_www.{sh | bat} file.
-    /c/temp/Enyo/TopWatch> ./tools/deploy_www.sh
+    /c/temp/Enyo/TopWatch_Build> ./tools/deploy_www.sh
 
 This executes the following steps:  
     1. Deletes the ./deploy/bootplate directory to start clean
@@ -115,11 +115,11 @@ This executes the following steps:
 In tools, you'll see install_webos.bat, sorry, didn't get to a shell script yet. running this script packages and deploys the app to a webOS device, edit the file and change the flag to flase to install on an emulator.
 
 Windows  
-    c:\temp\Enyo\TopWatch> tools\deploy.bat
+    c:\temp\Enyo\TopWatch_Build> tools\deploy.bat
 	
 # Part II
 
-Part Two is kind of lame, I'll basically take the output from Part I, and make it a Github project that can be incorporated as a submodule in Part III.
+Parts IIa & IIb are kind of lame, I'll basically take the output from Part I, and make it a Github project that can be incorporated as a submodule in Part III.
 
 # Part III
 
