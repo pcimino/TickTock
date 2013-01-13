@@ -3,6 +3,8 @@ TopWatch
 
 HTML5 Stop Watch demo leveraging the Enyo Bootplate Application template for packaged Enyo.
 
+# [Enyo Tutorial Part I](http://pcimino.blog.com/enyo/)
+
 Refer to the [Wiki](https://github.com/enyojs/enyo/wiki/Bootplate) for how to get started with Bootplate
 
 ## Using Enyo to build and deploy on multiple platforms
@@ -43,6 +45,9 @@ Create a directory where you want to setup code and follow this exercise.
 Open a shell and go there
 	> cd C:\temp\Enyo
 	
+## Hello World
+TopWatch was based on the [PhoneGap Hello World](https://github.com/phonegap/phonegap-start) app. I started with this, and then had to pull it apart to fit into the bootplate structure. So TopWatch_Build is a hybrid Enyo build enviroment, with extra components so the final product is compatible with the PhoneGap build template in Part III.
+
 ## Bootplate 
 I'll be using the Bootplate template to get started. It's convenient, but one thing I don't like is the mix of tool and application. The index.html is in the root directory at the same level as the tools/, lib/ and source/ directories. I would much prefer the entire application goes into a source/ and then the complete app is output into the build/ directory.
 
@@ -53,7 +58,7 @@ You can follow the [Bootplate instructions here](https://github.com/enyojs/enyo/
     > cd C:\temp\Enyo
     > git clone https://github.com/enyojs/bootplate.git TopWatch_Build
     > cd TopWatch_Build
-    > git submodule update --init --recursive
+    > git submodule update --init
     ( login to your Github account and create a [new repository here.](https://github.com/new)
     > git remote set-url origin git@github.com:your_username/TopWatch_Build.git
     > git push
