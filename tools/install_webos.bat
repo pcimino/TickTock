@@ -3,7 +3,7 @@
 set DEVICE=true
 
 :: Target build directory
-set DEPLOY=TopWatch
+set DEPLOY=TopWatch_Build
 
 :: Current directory
 set BASE=%CD%
