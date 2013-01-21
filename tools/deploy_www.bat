@@ -1,7 +1,7 @@
 @ECHO OFF
 
 :: Change this for the specific deploy directory
-set TARGET=TopWatch
+set TARGET=TopWatch_Build
 
 :: Current directory
 set BASE=%CD%
