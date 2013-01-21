@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TARGET_DIR=TopWatch
+TARGET_DIR=TopWatch_Build
 
 BASE=`pwd`
 rm -f -R $BASE/deploy
