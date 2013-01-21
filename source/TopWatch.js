@@ -23,7 +23,7 @@ enyo.kind({
 					{content: "Timer"}
 				]},
 				{kind: "List", name: "splitList", layoutKind: "FittableRowsLayout", style: "margin-top:55px;", classes: "onyx enyo-fit", touch: true, count: 1, onSetupItem: "setupItem", item: "item1", components: [
-					{name: "item1", classes: "panels-sample-sliding-item", style: "margin-left:20px;"}
+					{name: "item1", classes: "panels-sample-sliding-item", style: "margin-left:20px;font-size:36px;"}
 				]}
 			]}
 		]},

@@ -5,11 +5,11 @@ enyo.kind({
 	name:"TopWatchDial",
 	kind:"Control",
 	components: [
-		{kind:"Canvas", attributes: {width: 280, height: 300}, components: [
+		{kind:"enyo.Canvas", attributes: {width: 280, height: 300}, components: [
 			{name: "watchFace", kind: "canvas.Control"},
 			{name: "timerLayer", kind: "canvas.Control"},
-			{name:"timerText", kind: "canvas.Text", bounds: {l: 0, t: 15}, color: "black"},
-			{name:"splitText", kind: "canvas.Text", bounds: {l: 0, t: 15}, color: "black"}
+			{name:"timerText", kind: "enyo.canvas.Text", bounds: {l: 0, t: 0}, color: "black", font: "36pt Arial"},
+			{name:"splitText", kind: "enyo.canvas.Text", bounds: {l: 0, t: 0}, color: "black", font: "36pt Arial"}
 		]}
 	],
 	published: {
@@ -121,12 +121,12 @@ enyo.kind({
 	},
 	drawDial: function(milliColor, secColor, minColor, hourColor, centerColor, outerRadius) {
 		var canvasCenterX = dialRef.g_width/2;
-		var canvasCenterY = (dialRef.g_height - heightMargin)/2;
+		var canvasCenterY = -20 + (dialRef.g_height - heightMargin)/2;
 		var left = canvasCenterX;
 		var top = canvasCenterY;
-		dialRef.$.timerText.setBounds({l: left-70, t: dialRef.g_height - (heightMargin + 25)});
+		dialRef.$.timerText.setBounds({l: left-240, t: dialRef.g_height - (heightMargin + 15)});
 		dialRef.$.timerText.setText("Elapsed: 00:00:00:000");
-		dialRef.$.splitText.setBounds({l: left-45, t: dialRef.g_height - heightMargin});
+		dialRef.$.splitText.setBounds({l: left-160, t: (dialRef.g_height - (heightMargin - 25))});
 		dialRef.$.splitText.setText("Split: 00:00:00:000");
 		dialLabel = "Draw Dial :" + canvasCenterX+", "+canvasCenterY+", "+ outerRadius;
 
@@ -225,7 +225,7 @@ enyo.kind({
 		// Need to figure out when to destroy each component
 		
 		var canvasCenterX = dialRef.g_width/2;
-		var canvasCenterY = (dialRef.g_height - heightMargin)/2;
+		var canvasCenterY = -20 + (dialRef.g_height - heightMargin)/2;
 		
 		var outerRadius = dialRef.g_width;
 		if (dialRef.g_height < outerRadius) outerRadius = dialRef.g_height - heightMargin;
