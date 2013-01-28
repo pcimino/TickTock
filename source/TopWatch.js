@@ -13,17 +13,19 @@ enyo.kind({
 		{name: "slidingPane", kind: "Panels", fit: true, arrangerKind: "CollapsingArranger", animate: true, components: [
 			{name: "leftPanel", style: "width: 100%;", fixedWidth: true, draggable: true, animate: true, components: [
 				{kind:"onyx.MoreToolbar", ontap: "closePanel", components: [ 
-					{kind: "onyx.Grabber", noStretch: 'true', ontap: "closePanel"}, {content: "Splits"}
+					{kind: "onyx.Grabber", noStretch: 'true', ontap: "closePanel"}, {content: "Splits"}, 
+					{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 150px;"}
 				]},
-				{kind: "TopWatchDial", style: "margin-top:55px;"}
+				{kind: "TopWatchDial"}
 			]},
 			{name: "rightPanel", style: "width: 30%;", fixedWidth: false, draggable: true, animate: true, components: [
 				{kind:"onyx.MoreToolbar", name:"rightToolbar", ontap: "openPanel", components: [ 
 					{kind: "onyx.Grabber", noStretch: 'true', ontap: "openPanel"}, 
-					{content: "Timer"}
+					{content: "Timer"}, 
+					{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 145px;"}
 				]},
 				{kind: "List", name: "splitList", layoutKind: "FittableRowsLayout", style: "margin-top:55px;", classes: "onyx enyo-fit", touch: true, count: 1, onSetupItem: "setupItem", item: "item1", components: [
-					{name: "item1", classes: "panels-sample-sliding-item", style: "margin-left:20px;font-size:36px;"}
+					{name: "item1", classes: "panels-sample-sliding-item", style: "margin-left:20px;font-size:26px;"}
 				]}
 			]}
 		]},
@@ -33,12 +35,10 @@ enyo.kind({
 			classes: "onyx",
 			style: "height: 50px;",
 			components: [
-				{kind: "onyx.Button", content: "Start", ontap: "startTimer"},
-				{kind: "onyx.Button", content: "Split", ontap: "splitTimer"},
-				{kind: "onyx.Button", content: "Stop", ontap: "stopTimer"},
+				{kind: "onyx.Button", name: "startSplitButton", content: "Start", ontap: "startSplitTimer"},
+				// Not happy with button choices, needed to combine button functions to save on handset realestate
 				// Not working properly{kind: "onyx.Button", content: "Reset", ontap: "resetTimer"}, 
-				{kind: "onyx.Button", content: "Clear Splits", ontap: "clearSplits"}, 
-				{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 20px;"}
+				{kind: "onyx.Button", name: "stopResetButton", content: "Reset", ontap: "stopReset", style: "margin-left: 145px;"}
 			]
 		},
 		{kind: "PopupDialog", name: "HelpPopup"},
@@ -76,11 +76,14 @@ enyo.kind({
 		this.inherited(arguments);
 		topWatchRef = this;
 	},
-	startTimer: function() {
-		dialRef.startTimer();
-	},
-	splitTimer: function() {
-		dialRef.splitTimer();
+	startSplitTimer: function() {
+		if (dialRef.timerRunning === false) {
+			dialRef.startTimer();
+			this.$.startSplitButton.setContent("Split");
+			this.$.stopResetButton.setContent("Stop");
+		} else {
+			dialRef.splitTimer();
+		}
 	},
 	addSplit: function(record) {
 		topWatchRef.splitTimeData.push(record);
@@ -90,23 +93,24 @@ enyo.kind({
 	getNextId: function() {
 		return topWatchRef.padStr(topWatchRef.splitTimeData.length, " ", 4);
 	},
-	stopTimer: function() {
-		dialRef.stopTimer();
-	},
-	resetTimer: function() {
-	// Commenting out the RESET for now, funky behavior: If running, need to press reset twice, once to stop the timer and once to clear the dial, if stopped, reset won't clear the dial
-		dialRef.resetTimer();
-		// refresh list row
-		topWatchRef.clearSplits();
-		dialRef.resetTimer();
-		dialRef.$.timerLayer.destroyClientControls();
-	},
-	clearSplits: function() {
-		topWatchRef.splitTimeData = [{id:"", value:"Splits"}];
-		// refresh list row
-		topWatchRef.$.splitList.reset();
-		// Why twice?
-		topWatchRef.$.splitList.reset();
+	stopReset: function() {
+		if (dialRef.timerRunning === false) {
+			topWatchRef.splitTimeData = [{id:"", value:"Splits"}];
+			// refresh list row
+			topWatchRef.$.splitList.reset();
+			// Why twice?
+			topWatchRef.$.splitList.reset();
+			// Commenting out the RESET for now, funky behavior: If running, need to press reset twice, once to stop the timer and once to clear the dial, if stopped, reset won't clear the dial
+			dialRef.resetTimer();
+			// refresh list row
+			topWatchRef.clearSplits();
+			dialRef.resetTimer();
+			dialRef.$.timerLayer.destroyClientControls();
+		} else {
+			dialRef.stopTimer();
+			this.$.startSplitButton.setContent("Start");
+			this.$.stopResetButton.setContent("Reset");
+		}
 	},
 	closePanel: function() {
 		var index = this.$.slidingPane.setIndex(1);
@@ -115,7 +119,7 @@ enyo.kind({
 		var index = this.$.slidingPane.setIndex(0);
 	},
 	displayTime: function(timeStr) {
-		topWatchRef.splitTimeData[0].value = "Splits List. Current Timer:" + timeStr;
+		topWatchRef.splitTimeData[0].value = "Time: " + timeStr;
 		topWatchRef.$.splitList.reset();
 	},
 	setupItem: function(inSender, inEvent) {

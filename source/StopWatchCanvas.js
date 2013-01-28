@@ -1,21 +1,22 @@
 var TimeDelay = {defaultDelay : 5, runFlag :false};
 var heightMargin = 250;
+var circleScale = .4;
 
 enyo.kind({
 	name:"TopWatchDial",
 	kind:"Control",
 	components: [
-		{kind:"enyo.Canvas", attributes: {width: 280, height: 300}, components: [
+		{kind:"enyo.Canvas", attributes: {width: 280, height: 350}, components: [
 			{name: "watchFace", kind: "canvas.Control"},
 			{name: "timerLayer", kind: "canvas.Control"},
-			{name:"timerText", kind: "enyo.canvas.Text", bounds: {l: 0, t: 0}, color: "black", font: "36pt Arial"},
-			{name:"splitText", kind: "enyo.canvas.Text", bounds: {l: 0, t: 0}, color: "black", font: "36pt Arial"}
+			{name:"timerText", kind: "enyo.canvas.Text", bounds: {l: 0, t: 0}, color: "black", font: "20pt Arial"},
+			{name:"splitText", kind: "enyo.canvas.Text", bounds: {l: 0, t: 0}, color: "black", font: "20pt Arial"}
 		]}
 	],
 	published: {
 		g_beta:0,
 		g_width:280,
-		g_height:300,
+		g_height:350,
 		hour:0,
 		minute:0,
 		second:0,
@@ -77,7 +78,7 @@ enyo.kind({
 		dialRef.g_height = getHeight();
 		var largeDialRadius = dialRef.g_width;
 		if (dialRef.g_height < largeDialRadius) largeDialRadius = dialRef.g_height - heightMargin;
-		largeDialRadius = .4 * largeDialRadius;
+		largeDialRadius = circleScale * largeDialRadius;
 		dialRef.drawDial(dialRef.milliColor, dialRef.secColor, dialRef.minColor, dialRef.hourColor, dialRef.centerColor, largeDialRadius);
 	},
 	handleRotateCanvas: function(event) {
@@ -121,12 +122,12 @@ enyo.kind({
 	},
 	drawDial: function(milliColor, secColor, minColor, hourColor, centerColor, outerRadius) {
 		var canvasCenterX = dialRef.g_width/2;
-		var canvasCenterY = -20 + (dialRef.g_height - heightMargin)/2;
+		var canvasCenterY = 20 + (dialRef.g_height - heightMargin)/2;
 		var left = canvasCenterX;
 		var top = canvasCenterY;
-		dialRef.$.timerText.setBounds({l: left-240, t: dialRef.g_height - (heightMargin + 15)});
+		dialRef.$.timerText.setBounds({l: left-113, t: dialRef.g_height - (heightMargin - 70)});
 		dialRef.$.timerText.setText("Elapsed: 00:00:00:000");
-		dialRef.$.splitText.setBounds({l: left-160, t: (dialRef.g_height - (heightMargin - 25))});
+		dialRef.$.splitText.setBounds({l: left-70, t: (dialRef.g_height - (heightMargin - 105))});
 		dialRef.$.splitText.setText("Split: 00:00:00:000");
 		dialLabel = "Draw Dial :" + canvasCenterX+", "+canvasCenterY+", "+ outerRadius;
 
@@ -225,11 +226,11 @@ enyo.kind({
 		// Need to figure out when to destroy each component
 		
 		var canvasCenterX = dialRef.g_width/2;
-		var canvasCenterY = -20 + (dialRef.g_height - heightMargin)/2;
+		var canvasCenterY = 20 + (dialRef.g_height - heightMargin)/2;
 		
 		var outerRadius = dialRef.g_width;
 		if (dialRef.g_height < outerRadius) outerRadius = dialRef.g_height - heightMargin;
-		outerRadius = .4 * outerRadius;
+		outerRadius = circleScale * outerRadius;
 		var dialWidth = outerRadius/5;
 		var angle = 0;
 		
