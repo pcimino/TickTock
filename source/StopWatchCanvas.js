@@ -25,7 +25,7 @@ enyo.kind({
 		firstTime: true,
 		g_change: 4,
 		g_timeStr:"00:00:00.000",
-		milliColor:"DE1D43", secColor:"34308B", minColor:"2DAA4A", hourColor:"201C5A",centerColor:"86D0F4"
+		milliColor:"#DE1D43", secColor:"#34308B", minColor:"#2DAA4A", hourColor:"#201C5A",centerColor:"#86D0F4"
 	},
 	setupAnimation: function() {
 		// pause loop to update the balls
