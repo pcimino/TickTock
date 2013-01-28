@@ -102,10 +102,9 @@ enyo.kind({
 			topWatchRef.$.splitList.reset();
 			// Commenting out the RESET for now, funky behavior: If running, need to press reset twice, once to stop the timer and once to clear the dial, if stopped, reset won't clear the dial
 			dialRef.resetTimer();
-			// refresh list row
-			topWatchRef.clearSplits();
 			dialRef.resetTimer();
 			dialRef.$.timerLayer.destroyClientControls();
+			//dialRef.setupCanvasSize();
 		} else {
 			dialRef.stopTimer();
 			this.$.startSplitButton.setContent("Start");
