@@ -216,7 +216,6 @@ enyo.kind({
 		dialRef.g_timeStr = dialRef.timeString();
 		dialRef.displayTime();
 
-		
 		dialRef.firstTime = false;
 		this.frame++;
 		// update ball positions

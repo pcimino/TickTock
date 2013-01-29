@@ -95,16 +95,15 @@ enyo.kind({
 	},
 	stopReset: function() {
 		if (dialRef.timerRunning === false) {
+			dialRef.$.timerLayer.destroyClientControls();
+			dialRef.resetTimer();
 			topWatchRef.splitTimeData = [{id:"", value:"Splits"}];
 			// refresh list row
 			topWatchRef.$.splitList.reset();
 			// Why twice?
 			topWatchRef.$.splitList.reset();
 			// Commenting out the RESET for now, funky behavior: If running, need to press reset twice, once to stop the timer and once to clear the dial, if stopped, reset won't clear the dial
-			dialRef.resetTimer();
-			dialRef.resetTimer();
-			dialRef.$.timerLayer.destroyClientControls();
-			//dialRef.setupCanvasSize();
+			dialRef.$.canvas.update();
 		} else {
 			dialRef.stopTimer();
 			this.$.startSplitButton.setContent("Start");
