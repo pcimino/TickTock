@@ -122,7 +122,7 @@ enyo.kind({
 	},
 	drawDial: function(milliColor, secColor, minColor, hourColor, centerColor, outerRadius) {
 		var canvasCenterX = dialRef.g_width/2;
-		var canvasCenterY = 20 + (dialRef.g_height - heightMargin)/2;
+		var canvasCenterY = 25 + (dialRef.g_height - heightMargin)/2;
 		var left = canvasCenterX;
 		var top = canvasCenterY;
 		dialRef.$.timerText.setBounds({l: left-113, t: dialRef.g_height - (heightMargin - 70)});
@@ -226,7 +226,7 @@ enyo.kind({
 		// Need to figure out when to destroy each component
 		
 		var canvasCenterX = dialRef.g_width/2;
-		var canvasCenterY = 20 + (dialRef.g_height - heightMargin)/2;
+		var canvasCenterY = 25 + (dialRef.g_height - heightMargin)/2;
 		
 		var outerRadius = dialRef.g_width;
 		if (dialRef.g_height < outerRadius) outerRadius = dialRef.g_height - heightMargin;
