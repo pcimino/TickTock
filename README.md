@@ -80,6 +80,13 @@ These steps are not necessary if you're using the TopWatch project, but if you w
     Add the Shape2D package
     > git submodule add https://github.com/pcimino/Shape2D.git lib/Shape2D
 </pre>
+
+### Note ###
+I recently updated to Enyo 2.2 to get this working on Windows Phone. I found that running  the update wasn't doing what I expected. This is the recommended way to pull proper branch commits:  
+`git submodule update --recursive`  
+But I needed to pull everything:  
+`git pull --recurse-submodules`  
+
 ## Code Structure
 
 The location of code in bootplate is a little confusing. I would prefer Bootplate was more of a standalone utility, and you configure it to pul in and build your project. Instead your project becomes embedded into bootplate, bootplate becomes your project. While it's nice to have a template to build your project with, I think the locations of the build/deploy utilities and code resources could be a bit cleaner. If you're used to Enyo development for webOS, the directory structure is a bit different.
@@ -124,7 +131,7 @@ Windows
 	
 # Part II
 
-Parts IIa & IIb are kind of lame, I'll basically take the output from Part I, and make it a Github project that can be incorporated as a submodule in Part III.
+Parts [IIa](https://github.com/pcimino/TopWatch) & [IIb](https://github.com/pcimino/TopWatch_IPK) are kind of lame, I'll basically take the output from Part I, and make it a Github project that can be incorporated as a submodule in Part III.
 
 # Part III
 
