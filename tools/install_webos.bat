@@ -1,3 +1,4 @@
+cd ..
 @ECHO OFF
 :: Set to true to install on a webOS device, false for the emulator
 set DEVICE=true

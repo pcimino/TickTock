@@ -1,4 +1,6 @@
-@ECHO OFF
+
+@ECHO ON
+cd ..
 call minify.bat 
 setlocal enableDelayedExpansion
 

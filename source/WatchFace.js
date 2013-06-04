@@ -5,14 +5,7 @@ var circleScale = .4;
 enyo.kind({
 	name:"TopWatchDial",
 	kind:"Control",
-	components: [
-		{kind:"enyo.Canvas", attributes: {width: 280, height: 350}, components: [
-			{name: "watchFace", kind: "canvas.Control"},
-			{name: "timerLayer", kind: "canvas.Control"},
-			{name:"timerText", kind: "enyo.canvas.Text", bounds: {l: 0, t: 0}, color: "black", font: "20pt Arial"},
-			{name:"splitText", kind: "enyo.canvas.Text", bounds: {l: 0, t: 0}, color: "black", font: "20pt Arial"}
-		]}
-	],
+	components: [],
 	published: {
 		g_beta:0,
 		g_width:280,
@@ -28,6 +21,18 @@ enyo.kind({
 		g_timeStr:"00:00:00.000",
 		milliColor:"#DE1D43", secColor:"#34308B", minColor:"#2DAA4A", hourColor:"#201C5A",centerColor:"#86D0F4"
 	},
+  create: function() {
+    this.inherited(arguments);
+    this.setupBodyContent();
+  },
+  setupBodyContent: function() {
+    this.createComponent({name:'bodyContainer', fit: true, classes: "enyo-center body-margin"});
+    this.$.bodyContainer.createComponent({ name: "clockBackground", classes: "clock-background"});
+    this.$.bodyContainer.$.clockBackground.createComponent({name:"timerText", content :"99:99:99.99", classes: "clock-box"});
+    this.$.bodyContainer.createComponent({tag:'br'});
+    this.$.bodyContainer.createComponent({ name: "splitBackground", classes: "small-clock-background"});
+    this.$.bodyContainer.$.splitBackground.createComponent({name:"splitText", content :"99:99:99.99", classes: "clock-box"});
+  },
 	setupAnimation: function() {
 		// pause loop to update the balls
 		if (this.cancel) {
@@ -43,12 +48,12 @@ enyo.kind({
 		this.inherited(arguments);
 		dialRef = this;
 		this.setupAnimation();
-		
+
 		window.addEventListener("devicemotion", function(event) {
 			  // Process event.acceleration, event.accelerationIncludingGravity,
 			  // event.rotationRate and event.interval
 		  }, true);
-		  
+
 		window.addEventListener("deviceorientation", dialRef.handleRotateCanvas.bind(dialRef), true);
 
 		TimeDelay.monitorFlag = function() {
@@ -64,7 +69,7 @@ enyo.kind({
 				},TimeDelay.defaultDelay);
 			}
 		};
-		
+
 		this.setupCanvasSize();
 	},
 	setupCanvasSize: function() {
@@ -139,7 +144,7 @@ enyo.kind({
 		// Seconds
 		dialRef.drawIndicator(canvasCenterX, canvasCenterY, outerRadius, dialWidth, secColor, 12, 4, 3);
 		outerRadius -= dialWidth + 5;
-		
+
 		// Minutes
 		dialRef.drawIndicator(canvasCenterX, canvasCenterY, outerRadius, dialWidth, minColor, 12, 6, 2);
 		outerRadius -= dialWidth + 5;
@@ -153,10 +158,10 @@ enyo.kind({
 			lineWidth: 2,
 			outlineColor: centerColor,
 			color: centerColor,
-			x: canvasCenterX, 
-			y: canvasCenterY, 
-			radius: outerRadius, 
-			startAngle: -90, 
+			x: canvasCenterX,
+			y: canvasCenterY,
+			radius: outerRadius,
+			startAngle: -90,
 			endAngle: 270,
 			antiClockwise:false,
 			owner: dialRef});
@@ -167,23 +172,23 @@ enyo.kind({
 			lineWidth: circleWidth,
 			outlineColor: color,
 			color: "white",
-			x: centerX, 
-			y: centerY, 
-			radius: outerRadius, 
-			startAngle: -90, 
+			x: centerX,
+			y: centerY,
+			radius: outerRadius,
+			startAngle: -90,
 			endAngle: 270,
 			antiClockwise:false,
 			owner: dialRef});
-			
+
 		dialRef.$.watchFace.createComponent({
 			kind: "tld.Shape2D.Arc",
 			lineWidth: 4,
 			outlineColor: color,
 			color: "white",
-			x: centerX, 
-			y: centerY, 
-			radius: outerRadius - dialWidth, 
-			startAngle: -90, 
+			x: centerX,
+			y: centerY,
+			radius: outerRadius - dialWidth,
+			startAngle: -90,
 			endAngle: 270,
 			antiClockwise:false,
 			owner: dialRef});
@@ -196,9 +201,9 @@ enyo.kind({
 				outlineColor: color,
 				color: "",
 				startPoint:{x: centerX, y: centerY},
-				startDistance: outerRadius - dialWidth + (dialWidth/4), 
-				endDistance: outerRadius - (dialWidth/4), 
-				angle: tickDegree - 90, 
+				startDistance: outerRadius - dialWidth + (dialWidth/4),
+				endDistance: outerRadius - (dialWidth/4),
+				angle: tickDegree - 90,
 				owner: dialRef});
 		}
 	},
@@ -219,22 +224,22 @@ enyo.kind({
 		dialRef.firstTime = false;
 		this.frame++;
 		// update ball positions
-		
+
 		// If firstTime, render, otherwise need to evalualte if each component gets destroyed or not
-		
+
 		// Need to figure out when to destroy each component
-		
+
 		var canvasCenterX = dialRef.g_width/2;
 		var canvasCenterY = 25 + (dialRef.g_height - heightMargin)/2;
-		
+
 		var outerRadius = dialRef.g_width;
 		if (dialRef.g_height < outerRadius) outerRadius = dialRef.g_height - heightMargin;
 		outerRadius = circleScale * outerRadius;
 		var dialWidth = outerRadius/5;
 		var angle = 0;
-		
+
 		var found = false;
-		
+
 		/* More elegant, but doesn't seem to really make a difference, ends up needing suplicate code for first time through
 		for (var i = 0, b; (b = dialRef.$.timerLayer.children[i]); i++) {
 			if (b.name == "milli") {
@@ -281,21 +286,21 @@ enyo.kind({
 			// Seconds
 			dialRef.drawTimerHand(canvasCenterX, canvasCenterY, outerRadius, dialWidth, dialRef.secColor, angle, "second");
 			outerRadius -= dialWidth + 5;
-			
+
 			angle = (360 * dialRef.minute / 60) - 90;
-			// Minutes 
+			// Minutes
 			dialRef.drawTimerHand(canvasCenterX, canvasCenterY, outerRadius, dialWidth, dialRef.minColor, angle, "minute");
 			outerRadius -= dialWidth + 5;
-			
+
 			angle = (360 * dialRef.hour / 12) - 90;
 			// Hours
 			dialRef.drawTimerHand(canvasCenterX, canvasCenterY, outerRadius, dialWidth, dialRef.hourColor, angle, "hour");
 			outerRadius -= dialWidth + 5;
 		}
-		
+
 		dialRef.$.canvas.update();
 		this.start = Date.now();
-		
+
 		this.cancel = enyo.requestAnimationFrame(enyo.bind(this,"loop"));
 	},
 	drawTimerHand: function(centerX, centerY, outerRadius, dialWidth, color, angle, name) {
@@ -305,10 +310,10 @@ enyo.kind({
 			lineWidth: dialWidth,
 			outlineColor: color,
 			color: '',
-			x: centerX, 
-			y: centerY, 
-			radius: outerRadius - (dialWidth/2), 
-			startAngle: -90, 
+			x: centerX,
+			y: centerY,
+			radius: outerRadius - (dialWidth/2),
+			startAngle: -90,
 			endAngle: angle,
 			antiClockwise:false,
 			lineCap :"butt",
