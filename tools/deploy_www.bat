@@ -2,7 +2,7 @@
 
 :: Change this for the specific deploy directory
 set TARGET=TopWatch_Build
-cd ..
+
 :: Current directory
 set BASE=%CD%
 

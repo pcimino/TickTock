@@ -5,6 +5,9 @@ var dialRef = {};
 var topWatchRef = {};
 var dialLabel = "";
 var watchLabel = "";
+
+// var mailto_link = 'mailto:'+email+'?subject='+subject+'&body='+body_message;
+
 enyo.kind({
 	name: "TopWatch",
 	kind: "FittableRows",
@@ -12,16 +15,16 @@ enyo.kind({
 	components: [
 		{name: "slidingPane", kind: "Panels", fit: true, arrangerKind: "CollapsingArranger", animate: true, components: [
 			{name: "leftPanel", style: "width: 100%;", fixedWidth: true, draggable: true, animate: true, components: [
-				{kind:"onyx.MoreToolbar", ontap: "closePanel", components: [ 
-					{kind: "onyx.Grabber", noStretch: 'true', ontap: "closePanel"}, {content: "Splits"}, 
+				{kind:"onyx.MoreToolbar", ontap: "closePanel", components: [
+					{kind: "onyx.Grabber", noStretch: 'true', ontap: "closePanel"}, {content: "Splits"},
 					{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 150px;"}
 				]},
 				{kind: "TopWatchDial"}
 			]},
 			{name: "rightPanel", style: "width: 30%;", fixedWidth: false, draggable: true, animate: true, components: [
-				{kind:"onyx.MoreToolbar", name:"rightToolbar", ontap: "openPanel", components: [ 
-					{kind: "onyx.Grabber", noStretch: 'true', ontap: "openPanel"}, 
-					{content: "Timer"}, 
+				{kind:"onyx.MoreToolbar", name:"rightToolbar", ontap: "openPanel", components: [
+					{kind: "onyx.Grabber", noStretch: 'true', ontap: "openPanel"},
+					{content: "Timer"},
 					{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 145px;"}
 				]},
 				{kind: "List", name: "splitList", layoutKind: "FittableRowsLayout", style: "margin-top:55px;", classes: "onyx enyo-fit", touch: true, count: 1, onSetupItem: "setupItem", item: "item1", components: [
@@ -37,7 +40,7 @@ enyo.kind({
 			components: [
 				{kind: "onyx.Button", name: "startSplitButton", content: "Start", ontap: "startSplitTimer"},
 				// Not happy with button choices, needed to combine button functions to save on handset realestate
-				// Not working properly{kind: "onyx.Button", content: "Reset", ontap: "resetTimer"}, 
+				// Not working properly{kind: "onyx.Button", content: "Reset", ontap: "resetTimer"},
 				{kind: "onyx.Button", name: "stopResetButton", content: "Reset", ontap: "stopReset", style: "margin-left: 145px;"}
 			]
 		},
@@ -49,18 +52,18 @@ enyo.kind({
 			components: [
 				{
 					kind: "Image",
-					src: "img/LogoColor_162.png", 
+					src: "img/LogoColor_162.png",
 				},
 				{kind: "Button",
 					content: "Email Support@TransLunarDesigns.com",
-					ontap: "buttonEmailTap", 
+					ontap: "buttonEmailTap",
 				},
 				{name: "message", style: "font-size: 26px; padding: 6px; text-align: center;color:black;", content:"Enyo 2 Demonstration App"},
-				{kind: "onyx.Button", 
+				{kind: "onyx.Button",
 						content: "Project Blog & Code",
 						ontap: "openBlog",
 				},
-				{kind: "onyx.Button", 
+				{kind: "onyx.Button",
 					style: "margin-left: 20px;",
 					content: "Cancel",
 					ontap: "buttontapCancelHelp",
@@ -78,7 +81,8 @@ enyo.kind({
 	},
 	startSplitTimer: function() {
 		if (dialRef.timerRunning === false) {
-			dialRef.startTimer();
+			//dialRef.startTimer();
+      enyo.asyncMethod(dialRef,"startTimer");
 			this.$.startSplitButton.setContent("Split");
 			this.$.stopResetButton.setContent("Stop");
 		} else {
