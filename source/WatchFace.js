@@ -1,6 +1,4 @@
-var TimeDelay = {defaultDelay : 5, runFlag :false};
-var heightMargin = 250;
-var circleScale = .4;
+var TimeDelay = {defaultDelay : 5, runFlag :false, id: 0};
 
 enyo.kind({
 	name:"TopWatchDial",
@@ -9,16 +7,12 @@ enyo.kind({
     timerText: {},
     splitText: {},
 	published: {
-		g_beta:0,
-		g_width:280,
-		g_height:350,
 		hour:0,
 		minute:0,
 		second:0,
 		milliSec:0,
 		startTime:0,
 		timerRunning: false,
-		g_change: 4,
 		g_timeStr:"00:00:00.000"
 	},
   create: function() {
@@ -38,47 +32,41 @@ enyo.kind({
     this.$.bodyContainer.$.splitBackground.createComponent({kind: enyo.Control, name:"splitText", content :"00:00:00.000", classes: "small-clock-box"});
     this.$.splitText = this.$.bodyContainer.$.splitBackground.$.splitText;
   },
-	setupAnimation: function() {
-		this.loopStart = Date.now();
-		this.start = Date.now();
-		// (re)start loop
-		enyo.asyncMethod(this,"loop");
-	},
 	rendered: function() {
 		this.inherited(arguments);
 		dialRef = this;
-		this.setupAnimation();
+		this.drawDial();
+    TimeDelay.monitorFlag = function() {
+      if (TimeDelay.runFlag) {
+        var elapsed = new Date().getTime() - dialRef.startTime;
+        dialRef.milliSec = elapsed % 1000;
+        dialRef.second = parseInt(elapsed / 1000) % 60;
+        dialRef.minute = parseInt(elapsed / 60000) % 60;
+        dialRef.hour = parseInt(elapsed / 3600000) % 12;
+        dialRef.displayTime();
 
-
-		TimeDelay.monitorFlag = function() {
-			var elapsed = new Date().getTime() - dialRef.startTime;
-			dialRef.milliSec = elapsed % 1000;
-			dialRef.second = parseInt(elapsed / 1000) % 60;
-			dialRef.minute = parseInt(elapsed / 60000) % 60;
-			dialRef.hour = parseInt(elapsed / 3600000) % 12;
-			dialRef.displayTime();
-			if (TimeDelay.runFlag) {
 				setTimeout(function() {
 					TimeDelay.monitorFlag();
 				},TimeDelay.defaultDelay);
 			}
 		};
-
 	},
-	setupCanvasSize: function() {
-		dialRef.$.timerLayer.destroyClientControls();
-		dialRef.$.watchFace.destroyClientControls();
-		dialRef.g_width = getWidth();
-		dialRef.g_height = getHeight();
-		dialRef.$.canvas.setAttribute("width", dialRef.g_width);
-		dialRef.$.canvas.setAttribute("height", dialRef.g_height);
-		dialRef.g_width = getWidth();
-		dialRef.g_height = getHeight();
-		var largeDialRadius = dialRef.g_width;
-		if (dialRef.g_height < largeDialRadius) largeDialRadius = dialRef.g_height - heightMargin;
-		largeDialRadius = circleScale * largeDialRadius;
-		dialRef.drawDial(dialRef.milliColor, dialRef.secColor, dialRef.minColor, dialRef.hourColor, dialRef.centerColor, largeDialRadius);
-	},
+  loop: function() {  // try this if Monitor doesn't work
+    if (TimeDelay.runFlag) {
+      var elapsed = new Date().getTime() - dialRef.startTime;
+      dialRef.milliSec = elapsed % 1000;
+      dialRef.second = parseInt(elapsed / 1000) % 60;
+      dialRef.minute = parseInt(elapsed / 60000) % 60;
+      dialRef.hour = parseInt(elapsed / 3600000) % 12;
+      dialRef.displayTime();
+    } else {
+        clearInterval(TimeDelay.id);
+    }
+  };
+  startLoop() : fuunction() {
+    TimeDelay.runFlag = true;
+    TimeDelay.id = setInterval(loop, TimeDelay.defaultDelay);
+  }
 	destroy: function() {
 		this.inherited(arguments);
     stopTimer();
@@ -87,13 +75,9 @@ enyo.kind({
 		dialRef.$.timerText.setContent("00:00:00:000");
 		dialRef.$.splitText.setContent("00:00:00:000");
 	},
-	loop: function() {
-		dialRef.displayTime();
-		this.start = Date.now();
-		startTimer();
-	},
 	startTimer: function() {
 		dialRef.timerRunning = true;
+    dialRef.startTime = new Date().getTime();
 		dialRef.hour = 0;
 		dialRef.minute = 0;
 		dialRef.second = 0;
@@ -102,7 +86,7 @@ enyo.kind({
 		dialRef.displayTime();
 		dialRef.displaySplitTime();
 		TimeDelay.runFlag = true;
-		dialRef.startTime = new Date().getTime();
+    dialRef.displayTime();
 		TimeDelay.monitorFlag();
 	},
 	splitTimer: function() {
@@ -120,8 +104,13 @@ enyo.kind({
 	stopTimer: function() {
 		TimeDelay.runFlag = false;
 		dialRef.timerRunning = false;
-		dialRef.g_timeStr = dialRef.timeString();
-		dialRef.displayTime();
+    var elapsed = new Date().getTime() - dialRef.startTime;
+    dialRef.milliSec = elapsed % 1000;
+    dialRef.second = parseInt(elapsed / 1000) % 60;
+    dialRef.minute = parseInt(elapsed / 60000) % 60;
+    dialRef.hour = parseInt(elapsed / 3600000) % 12;
+    dialRef.g_timeStr = dialRef.timeString();
+    dialRef.displayTime();
 		var id = topWatchRef.getNextId();
 		topWatchRef.addSplit({"id":id, value: dialRef.g_timeStr});
 		dialRef.displaySplitTime();
