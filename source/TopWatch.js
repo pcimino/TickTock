@@ -48,7 +48,7 @@ enyo.kind({
 		{kind: onyx.Popup,
 			name: "popupHelp",
 			centered: true,
-			style: "text-align: center; padding: 10px; background: #C9C9C9;width: 350px;",
+			style: "text-align: center; padding: 10px; background: #C9C9C9;",
 			components: [
 				{
 					kind: "Image",
