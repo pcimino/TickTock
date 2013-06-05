@@ -17,7 +17,7 @@ enyo.kind({
 			{name: "leftPanel", style: "width: 100%;", fixedWidth: true, draggable: true, animate: true, components: [
 				{kind:"onyx.MoreToolbar", ontap: "closePanel", components: [
 					{kind: "onyx.Grabber", noStretch: 'true', ontap: "closePanel"}, {content: "Splits"},
-					{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 150px;"}
+					{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 90%;"}
 				]},
 				{kind: "TopWatchDial"}
 			]},
@@ -25,7 +25,7 @@ enyo.kind({
 				{kind:"onyx.MoreToolbar", name:"rightToolbar", ontap: "openPanel", components: [
 					{kind: "onyx.Grabber", noStretch: 'true', ontap: "openPanel"},
 					{content: "Timer"},
-					{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 145px;"}
+					{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 90%;"}
 				]},
 				{kind: "List", name: "splitList", layoutKind: "FittableRowsLayout", style: "margin-top:55px;", classes: "onyx enyo-fit", touch: true, count: 1, onSetupItem: "setupItem", item: "item1", components: [
 					{name: "item1", classes: "panels-sample-sliding-item", style: "margin-left:20px;font-size:26px;"}

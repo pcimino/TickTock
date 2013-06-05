@@ -134,15 +134,15 @@ rm -f *.ipk
 CALL palm-package.bat %DEPLOY%
 
 :: CALL palm-install.bat  *.ipk
-:: call palm-launch.bat  com.translunardesigns.topwatch
+:: call palm-launch.bat  com.translunardesigns.ticktock
 
 
 CALL palm-install.bat -d usb *.ipk
-call palm-launch.bat -d usb com.translunardesigns.topwatch
+call palm-launch.bat -d usb com.translunardesigns.ticktock
 
 pause
 CALL palm-install.bat -d emulator *.ipk
-call palm-launch.bat -d emulator com.translunardesigns.topwatch
+call palm-launch.bat -d emulator com.translunardesigns.ticktock
 
 
 

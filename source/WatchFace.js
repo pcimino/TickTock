@@ -6,6 +6,8 @@ enyo.kind({
 	name:"TopWatchDial",
 	kind:"Control",
 	components: [],
+    timerText: {},
+    splitText: {},
 	published: {
 		g_beta:0,
 		g_width:280,
@@ -25,11 +27,16 @@ enyo.kind({
   },
   setupBodyContent: function() {
     this.createComponent({name:'bodyContainer', fit: true, classes: "enyo-center body-margin"});
-    this.$.bodyContainer.createComponent({ name: "clockBackground", classes: "clock-background"});
-    this.$.bodyContainer.$.clockBackground.createComponent({name:"timerText", content :"99:99:99.99", classes: "clock-box"});
     this.$.bodyContainer.createComponent({tag:'br'});
-    this.$.bodyContainer.createComponent({ name: "splitBackground", classes: "small-clock-background"});
-    this.$.bodyContainer.$.splitBackground.createComponent({name:"splitText", content :"99:99:99.99", classes: "clock-box"});
+    this.$.bodyContainer.createComponent({tag:'br'});
+    this.$.bodyContainer.createComponent({tag:'br'});
+    this.$.bodyContainer.createComponent({ name: "clockBackground", classes: "clock-background"});
+    this.$.bodyContainer.$.clockBackground.createComponent({kind: enyo.Control, name:"timerText", content :"00:00:00.000", classes: "clock-box"});
+    this.$.timerText = this.$.bodyContainer.$.clockBackground.$.timerText;
+    this.$.bodyContainer.createComponent({tag:'br'});
+    this.$.bodyContainer.createComponent({name: "splitBackground", classes: "small-clock-background"});
+    this.$.bodyContainer.$.splitBackground.createComponent({kind: enyo.Control, name:"splitText", content :"00:00:00.000", classes: "small-clock-box"});
+    this.$.splitText = this.$.bodyContainer.$.splitBackground.$.splitText;
   },
 	setupAnimation: function() {
 		this.loopStart = Date.now();
