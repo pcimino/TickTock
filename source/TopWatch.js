@@ -17,7 +17,7 @@ enyo.kind({
 			{name: "leftPanel", style: "width: 100%;", fixedWidth: true, draggable: true, animate: true, components: [
 				{kind:"onyx.MoreToolbar", ontap: "closePanel", components: [
 					{kind: "onyx.Grabber", noStretch: 'true', ontap: "closePanel"}, {content: "Splits"},
-					{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 90%;"}
+					{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 150px;"}
 				]},
 				{kind: "TopWatchDial"}
 			]},
@@ -25,7 +25,7 @@ enyo.kind({
 				{kind:"onyx.MoreToolbar", name:"rightToolbar", ontap: "openPanel", components: [
 					{kind: "onyx.Grabber", noStretch: 'true', ontap: "openPanel"},
 					{content: "Timer"},
-					{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 90%;"}
+					{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 150px;"}
 				]},
 				{kind: "List", name: "splitList", layoutKind: "FittableRowsLayout", style: "margin-top:55px;", classes: "onyx enyo-fit", touch: true, count: 1, onSetupItem: "setupItem", item: "item1", components: [
 					{name: "item1", classes: "panels-sample-sliding-item", style: "margin-left:20px;font-size:26px;"}
@@ -53,12 +53,12 @@ enyo.kind({
 				{
 					kind: "Image",
 					src: "img/LogoColor_162.png",
-				},
+				},{tag:'br'},
 				{kind: "Button",
 					content: "Email Support@TransLunarDesigns.com",
 					ontap: "buttonEmailTap",
-				},
-				{name: "message", style: "font-size: 26px; padding: 6px; text-align: center;color:black;", content:"Enyo 2 Demonstration App"},
+				},{tag:'br'},
+				{name: "message", style: "font-size: 26px; padding: 6px; text-align: center;color:black;", content:"Enyo 2 Demonstration App"},{tag:'br'},
 				{kind: "onyx.Button",
 						content: "Project Blog & Code",
 						ontap: "openBlog",
@@ -99,15 +99,12 @@ enyo.kind({
 	},
 	stopReset: function() {
 		if (dialRef.timerRunning === false) {
-			dialRef.$.timerLayer.destroyClientControls();
 			dialRef.resetTimer();
 			topWatchRef.splitTimeData = [{id:"", value:"Splits"}];
 			// refresh list row
 			topWatchRef.$.splitList.reset();
 			// Why twice?
 			topWatchRef.$.splitList.reset();
-			// Commenting out the RESET for now, funky behavior: If running, need to press reset twice, once to stop the timer and once to clear the dial, if stopped, reset won't clear the dial
-			dialRef.$.canvas.update();
 		} else {
 			dialRef.stopTimer();
 			this.$.startSplitButton.setContent("Start");
