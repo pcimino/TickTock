@@ -71,11 +71,17 @@ enyo.kind({
 		TimeDelay.runFlag = true;
         dialRef.displayTime();
         this.startLoop();
+        this.resizeText();
 	},
+    resizeText: function() {
+        var font = Math.round(window.innerWidth / 3.5);
+        var smallFont = Math.round(window.innerWidth / 7);
+        this.$.bodyContainer.$.clockBackground.applyStyle("font-size", font + '%');
+        this.$.bodyContainer.$.splitBackground.applyStyle("font-size", font + '%');
+    },
 	splitTimer: function() {
 		if (TimeDelay.runFlag) {
 			dialRef.g_timeStr = dialRef.timeString();
-			dialRef.displaySplitTime();
 			dialRef.displaySplitTime();
 		} else {
 			dialRef.displaySplitTime();
@@ -92,7 +98,6 @@ enyo.kind({
         dialRef.g_timeStr = dialRef.timeString();
         dialRef.displaySplitTime();
         dialRef.displayTime();
-		
 	},
 	resetTimer: function() {
 		dialRef.hour = 0;
@@ -106,6 +111,7 @@ enyo.kind({
 	},
 	displayTime: function() {
 		dialRef.$.timerText.setContent(dialRef.g_timeStr);
+        this.resizeText();
 	},
 	displaySplitTime: function() {
 		dialRef.$.splitText.setContent(dialRef.g_timeStr);

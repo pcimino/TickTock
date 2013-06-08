@@ -1,43 +1,39 @@
 /* Copyright 2010-2011 Trans Lunar Designs, Inc. All rights reserved. */
 .clock-box {
   border: 2px solid gray;
-  margin: 12px 12px 12px 12px;
-  padding: 12px 0px 12px 12px;
   background: gray;
-  margin-left:12%;
-  margin-right:12%;
+  margin-left:4%;
+  margin-right:5%;
   font-family:arial;
   color: white;
-  font-size:80px;
+  font-size:220%;
   font-weight:bold;
   text-align:center;
 }
 .clock-background {
-	border: 2px solid black;
-    margin: 12px 12px 12px 12px;
-    padding: 12px 0px 12px 12px;
-    background: black;
-    margin-left:15%;
-    margin-right:15%;
+  border: 2px solid black;  
+  margin: 12px 12px 12px 12px;
+  padding: 12px 0px 12px 12px;
+  background: black;
+  margin-left:15%;
+  margin-right:15%;
 }
 .small-clock-box {
-    border: 2px solid gray;
-    margin: 12px 12px 12px 12px;
-    padding: 12px 0px 12px 12px;
-    background: gray;
-    margin-left:15%;
-    margin-right:15%;
-    font-family:arial;
-    color: white;
-    font-size:50px;
-    font-weight:bold;
-    text-align:center;
+  border: 2px solid gray;
+  background: gray;
+  margin-left:6%;
+  margin-right:8%;
+  font-family:arial;
+  color: white;
+  font-size:150%;
+  font-weight:bold;
+  text-align:center;
 }
 .small-clock-background {
-	  border: 2px solid black;
-    margin: 12px 12px 12px 12px;
-    padding: 12px 0px 12px 12px;
-    background: black;
-    margin-left:25%;
-    margin-right:25%;
+  border: 2px solid black;
+  margin: 12px 12px 12px 12px;
+  padding: 12px 0px 12px 12px;
+  background: black;
+  margin-left:25%;
+  margin-right:25%;
 }

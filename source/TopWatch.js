@@ -17,7 +17,8 @@ enyo.kind({
 			{name: "leftPanel", style: "width: 100%;", fixedWidth: true, draggable: true, animate: true, components: [
 				{kind:"onyx.MoreToolbar", ontap: "closePanel", components: [
 					{kind: "onyx.Grabber", noStretch: 'true', ontap: "closePanel"}, {content: "Splits"},
-					{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 150px;"}
+					{kind: "enyo.Image", src: "img/Email_Large.png", ontap: "emailSplits", style: "margin-left:50px;width:35px;height:35px;"},
+					{kind: "enyo.Image", src: "img/QuestionMark_Large.png", ontap: "openPopup", style: "margin-left:50px;width:35px;height:35px;"}
 				]},
 				{kind: "TopWatchDial"}
 			]},
@@ -25,9 +26,10 @@ enyo.kind({
 				{kind:"onyx.MoreToolbar", name:"rightToolbar", ontap: "openPanel", components: [
 					{kind: "onyx.Grabber", noStretch: 'true', ontap: "openPanel"},
 					{content: "Timer"},
-					{kind: "onyx.IconButton", src: "img/QuestionMark.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left: 150px;"}
+					{kind: "enyo.Image", src: "img/Email_Large.png", ontap: "emailSplits", style: "margin-left:50px;width:35px;height:35px;"},
+					{kind: "enyo.Image", src: "img/QuestionMark_Large.png", ontap: "openPopup", popup: "popupHelp", style: "margin-left:50px;width:35px;height:35px;"}
 				]},
-				{kind: "List", name: "splitList", layoutKind: "FittableRowsLayout", style: "margin-top:55px;", classes: "onyx enyo-fit", touch: true, count: 1, onSetupItem: "setupItem", item: "item1", components: [
+				{kind: "List", name: "splitList", layoutKind: "FittableRowsLayout", style: "margin-top:65px;", classes: "onyx enyo-fit", touch: true, count: 1, onSetupItem: "setupItem", item: "item1", components: [
 					{name: "item1", classes: "panels-sample-sliding-item", style: "margin-left:20px;font-size:26px;"}
 				]}
 			]}
@@ -81,8 +83,7 @@ enyo.kind({
 	},
 	startSplitTimer: function() {
 		if (dialRef.timerRunning === false) {
-			//dialRef.startTimer();
-      enyo.asyncMethod(dialRef,"startTimer");
+			dialRef.startTimer();
 			this.$.startSplitButton.setContent("Split");
 			this.$.stopResetButton.setContent("Stop");
 		} else {
@@ -141,6 +142,14 @@ enyo.kind({
 			p.show();
 		}
 	},
+    emailSplits: function() {
+        var vals = 'Splits\r\n';
+        for (var i = 1; i < topWatchRef.splitTimeData.length; i++) {
+            vals = vals + topWatchRef.splitTimeData[i].id + ": " + topWatchRef.splitTimeData[i].value + "\r\n";
+        }
+
+        window.open("mailto:?subject=Split Times&body=" + escape(vals));
+    },
 	buttonEmailTap: function() {
 		window.open("mailto:Support@TransLunarDesigns.com?subject=Question/Suggestion");
 		this.$.popupHelp.hide();
