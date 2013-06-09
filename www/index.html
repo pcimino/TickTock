@@ -27,29 +27,9 @@
 		<link href="build/app.css" rel="stylesheet"/>
 		<!-- js -->
 		<script src="build/enyo.js"></script>
-		<script src="build/app.js"></script>
-	<script language="javascript" type="text/javascript" charset="utf-8"> 
-		function onLoad() {
-			if (window.PalmSystem) {
-				window.PalmSystem.stageReady();
-			}
-		}
-		function getWidth() {
-			return window.innerWidth;
-		}
-		function getHeight() {
-			return window.innerHeight;
-		}
-		</script>
+        <script src="build/app.js"></script>
 </head>
-<body onload="onLoad()" class="enyo-unselectable">
-		<script>
-			if (!window.enyo) {
-				alert('No application build found, redirecting to debug.html.');
-				location = 'debug.html';
-			}
-			//enyo.start();
-			new TopWatch().renderInto(document.body);
-		</script>
-	</body>
+<body class="enyo-unselectable">
+    <script type="text/javascript" src="onload-script.js"></script>
+</body>
 </html>

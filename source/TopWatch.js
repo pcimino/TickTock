@@ -92,7 +92,6 @@ enyo.kind({
 	},
 	addSplit: function(record) {
 		topWatchRef.splitTimeData.push(record);
-		//topWatchRef.$.splitList.renderRow(topWatchRef.splitTimeData.length-1);
 		topWatchRef.$.splitList.reset();
 	},
 	getNextId: function() {

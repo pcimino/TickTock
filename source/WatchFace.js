@@ -36,6 +36,7 @@ enyo.kind({
 		this.inherited(arguments);
 		dialRef = this;
 		dialRef.displayTime();
+        this.resizeText();
 	},
   loop: function() {  // try this if Monitor doesn't work
     if (TimeDelay.runFlag) {
@@ -71,13 +72,16 @@ enyo.kind({
 		TimeDelay.runFlag = true;
         dialRef.displayTime();
         this.startLoop();
-        this.resizeText();
 	},
     resizeText: function() {
-        var font = Math.round(window.innerWidth / 3.5);
-        var smallFont = Math.round(window.innerWidth / 7);
+        var font = Math.round(window.innerWidth / 3.7);
+        var smallFont = Math.round(window.innerWidth / 7.4);
         this.$.bodyContainer.$.clockBackground.applyStyle("font-size", font + '%');
         this.$.bodyContainer.$.splitBackground.applyStyle("font-size", font + '%');
+    },
+    resizeHandler: function() {
+        this.inherited(arguments);
+        this.resizeText();
     },
 	splitTimer: function() {
 		if (TimeDelay.runFlag) {
@@ -111,7 +115,6 @@ enyo.kind({
 	},
 	displayTime: function() {
 		dialRef.$.timerText.setContent(dialRef.g_timeStr);
-        this.resizeText();
 	},
 	displaySplitTime: function() {
 		dialRef.$.splitText.setContent(dialRef.g_timeStr);

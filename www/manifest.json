@@ -3,6 +3,8 @@
   "name": "Tick Tock",
   "description": "Simple stop watch demonstrating Enyo.",
   "version": "0.1.0",
+  "minimum_chrome_version": "23",
+  "offline_enabled": true,
   "app": {
     "background": {
       "scripts": ["background.js"]
