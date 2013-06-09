@@ -185,6 +185,6 @@ enyo.kind({
 		return retStr.substring(stringVal.length - length);
 	},
 	openBlog: function() {
-		window.open("http://pcimino.blog.com/tick-tock-an-enyo-app-for-the-mozilla-marketplace-chrome-store-and-hp-catalog/")
+		window.open("http://pcimino.blog.com/2013/06/09/tick-tock-an-enyo-app-for-the-mozilla-marketplace-chrome-store-and-hp-catalog/")
 	}
 });
