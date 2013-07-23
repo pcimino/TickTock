@@ -16,5 +16,5 @@
   },
   "launch_path": "/index.html",
   "installs_allowed_from": ["https://marketplace.firefox.com", "*"],
-  "type": "privileged"
+  "type": "web"
 }
